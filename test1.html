@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>test1 — same-domain iframe target</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body { padding: var(--space-5); }
+  .page-kicker { display: inline-block; margin-bottom: var(--space-3); }
+  .button-container1 {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border: 1px dashed var(--color-primary);
+    border-radius: var(--radius-md);
+    min-width: 90px;
+    padding: var(--space-4);
+    text-align: center;
+    font-weight: 600;
+  }
+  .long {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 var(--space-6);
+  }
+  .reading-card {
+    padding: var(--space-5);
+  }
+</style>
+</head>
+<body>
+
+  <span class="tag page-kicker">Same-domain iframe</span>
+  <h1 class="title">Player Test Page</h1>
+  <p class="muted">Loaded inside <code>iframes.html</code> and <code>frameset.html</code> as a same-domain embed.</p>
+
+  <div class="long">
+    <div id="1st" class="button-container1">Element 1</div>
+    <div id="2nd" class="button-container1">Element 2</div>
+    <div id="3rd" class="button-container1">Element 3</div>
+    <div id="4th" class="button-container1">Element 4</div>
+    <div id="5th" class="button-container1">Element 5</div>
+    <div id="6th" class="button-container1">Element 6</div>
+    <div id="7th" class="button-container1">Element 7</div>
+    <div id="8th" class="button-container1">Element 8</div>
+  </div>
+
+  <div class="card form-card">
+    <form action="/action_page.php">
+      <div class="field">
+        <label for="fname">First name</label>
+        <input type="text" id="fname" name="fname" value="John">
+      </div>
+      <div class="field">
+        <label for="lname">Last name</label>
+        <input type="text" id="lname" name="lname" value="Doe">
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <h2>Same domain Iframe</h2>
+  <p>The Israeli Air Force</p>
+
+  <div id="idf" class="card reading-card">
+    <p>The Israeli Air Force (IAF; Hebrew: זְרוֹעַ הָאֲוִיר וְהֶחָלָל, romanized: Zroa HaAvir VeHahalal, lit. 'Air and Space Arm', commonly known as חֵיל הָאֲוִיר‎, Kheil HaAvir, "Air Corps") operates as the aerial and space warfare branch of the Israel Defense Forces (IDF). It was founded on May 28, 1948, shortly after the Israeli Declaration of Independence. As of April 2022, Aluf Tomer Bar has been serving as the Air Force commander.</p>
+    <p>The Israeli Air Force was established using commandeered or donated civilian aircraft and obsolete and surplus World War II combat aircraft. Eventually, more aircraft were procured, including Boeing B-17s, Bristol Beaufighters, de Havilland Mosquitoes and P-51D Mustangs. The Israeli Air Force played an important part in Operation Kadesh, Israel's part in the 1956 Suez Crisis, dropping paratroopers at the Mitla Pass. On June 5, 1967, the first day of the Six-Day War, the Israeli Air Force performed Operation Focus, debilitating the opposing Arab air forces and attaining air supremacy for the remainder of the war.</p>
+  </div>
+
+</body>
+</html>

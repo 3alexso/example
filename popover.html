@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scattered Popovers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the page and popovers */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark gray background */
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Styling for the popover content */
+        [popover] {
+            /* Base styles */
+            border: none;
+            box-shadow: 0 -15px 40px -15px rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            background-color: #1f2937;
+            text-align: center;
+            color: #f3f4f6;
+
+            /* Positioning and Sizing for bottom banner */
+            inset: auto 0 0 0; /* Stick to bottom */
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            border-radius: 1.5rem 1.5rem 0 0; /* Rounded top corners */
+        }
+
+        /* The backdrop is now transparent */
+        [popover]::backdrop {
+            background-color: rgba(0, 0, 0, 0.0);
+            backdrop-filter: none;
+        }
+
+        /* Style for the trigger buttons */
+        .popover-trigger {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 9999px; /* rounded-full */
+            border: none;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .popover-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .intro-card {
+            background: rgba(17, 24, 39, 0.55);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <div id="main-container" class="relative w-full" style="min-height: 400vh;">
+        <!-- Popover triggers and content are inserted here by the script below -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center p-8 intro-card rounded-2xl">
+            <h1 class="text-4xl md:text-6xl font-bold text-white">Scattered Popovers</h1>
+            <p class="mt-4 text-lg text-gray-300">60 triggers are scattered across the page — scroll to find them.</p>
+            <p class="mt-2 text-sm text-gray-400">A random popover also opens automatically every few seconds, to exercise the native Popover API.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const numberOfElements = 60;
+            const popoverElements = [];
+            const colors = [
+                'bg-rose-600', 'bg-purple-600', 'bg-violet-600', 'bg-indigo-600',
+                'bg-blue-600', 'bg-cyan-600', 'bg-teal-600', 'bg-emerald-600',
+                'bg-lime-600', 'bg-amber-600', 'bg-orange-600'
+            ];
+
+            // --- 1. Dynamically create all popover elements and their triggers ---
+            for (let i = 0; i < numberOfElements; i++) {
+                // Create the trigger button
+                const trigger = document.createElement('button');
+                const popoverId = `popover-${i}`;
+                trigger.id = `trigger-${i}`;
+                trigger.classList.add('popover-trigger');
+                trigger.setAttribute('popovertarget', popoverId);
+                trigger.textContent = `${i + 1}`;
+
+                // Assign random position and color
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const randomTop = Math.random() * 380 + 15; // From 15vh to 395vh
+                const randomLeft = Math.random() * 90 + 5; // From 5% to 95%
+
+                trigger.classList.add(randomColor);
+                trigger.style.top = `${randomTop}vh`;
+                trigger.style.left = `${randomLeft}%`;
+
+                // Create the popover content
+                const popover = document.createElement('div');
+                popover.id = popoverId;
+                popover.setAttribute('popover', 'auto');
+                popover.innerHTML = `
+                    <div class="max-w-4xl mx-auto">
+                        <h3 class="text-xl font-bold text-white mb-2">Popover #${i + 1}</h3>
+                        <p class="text-gray-300">This is the content for popover number ${i + 1}. It was triggered automatically and will close soon.</p>
+                        <button popovertarget="${popoverId}" popovertargetaction="hide" class="mt-4 px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded-lg text-white font-semibold transition-colors">
+                            Close
+                        </button>
+                    </div>
+                `;
+
+                // Add to the container and keep a reference
+                container.appendChild(trigger);
+                container.appendChild(popover);
+                popoverElements.push(popover);
+            }
+
+            // --- 2. Set up the interval to automatically show/hide popovers ---
+            const cycleInterval = 5000; // 5 seconds
+            let currentPopover = null;
+
+            const cyclePopovers = () => {
+                // Hide any currently open popover
+                if (currentPopover) {
+                    try {
+                        currentPopover.hidePopover();
+                    } catch (e) {
+                        // This can happen if the user manually closes it. It's safe to ignore.
+                    }
+                }
+
+                // Select a new random popover to show
+                const randomIndex = Math.floor(Math.random() * popoverElements.length);
+                const randomPopover = popoverElements[randomIndex];
+
+                // Show the new popover and set it as the current one
+                randomPopover.showPopover();
+                currentPopover = randomPopover;
+            };
+
+            // Start the cycle
+            setInterval(cyclePopovers, cycleInterval);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>test2 — shadow DOM iframe target</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body { padding: var(--space-5); }
+  .page-kicker { display: inline-block; margin-bottom: var(--space-3); background: #e8fbf3; color: #1f9d55; }
+  .button-container1 {
+    background: #e8fbf3;
+    color: #1f9d55;
+    border: 1px dashed #1f9d55;
+    border-radius: var(--radius-md);
+    min-width: 90px;
+    padding: var(--space-4);
+    text-align: center;
+    font-weight: 600;
+  }
+  .long {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 var(--space-6);
+  }
+  .reading-card {
+    padding: var(--space-5);
+  }
+</style>
+</head>
+<body>
+
+  <span class="tag page-kicker">Shadow DOM iframe</span>
+  <h1 class="title">Player Test Page</h1>
+  <p class="muted">Loaded inside a <code>&lt;same-domain-iframe-in-shadow&gt;</code> custom element on <code>iframes.html</code>.</p>
+
+  <div class="long">
+    <div id="1st" class="button-container1">Element 11</div>
+    <div id="2nd" class="button-container1">Element 12</div>
+    <div id="3rd" class="button-container1">Element 13</div>
+    <div id="4th" class="button-container1">Element 14</div>
+    <div id="5th" class="button-container1">Element 15</div>
+    <div id="6th" class="button-container1">Element 16</div>
+    <div id="7th" class="button-container1">Element 17</div>
+    <div id="8th" class="button-container1">Element 18</div>
+  </div>
+
+  <div class="card form-card">
+    <form action="/action_page.php">
+      <div class="field">
+        <label for="fname">First name</label>
+        <input type="text" id="fname" name="fname" value="Jane">
+      </div>
+      <div class="field">
+        <label for="lname">Last name</label>
+        <input type="text" id="lname" name="lname" value="Smith">
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <h2>Same Domain Shadow DOM Iframe</h2>
+  <p>The platypus</p>
+
+  <div id="platypus" class="card reading-card">
+    <p>The platypus (Ornithorhynchus anatinus), sometimes referred to as the duck-billed platypus, is a semiaquatic, egg-laying mammal endemic to eastern Australia, including Tasmania. The platypus is the sole living representative of its family Ornithorhynchidae and genus Ornithorhynchus, though a number of related species appear in the fossil record. Together with the four species of echidna, it is one of the five extant species of monotremes, mammals that lay eggs instead of giving birth to live young. Like other monotremes, the platypus has a sense of electrolocation, which it uses to detect prey in water while its eyes, ears and nostrils are closed. It is one of the few species of venomous mammals, as the male platypus has a spur on each hind foot that delivers an extremely painful venom.</p>
+    <p>The unusual appearance of this egg-laying, duck-billed, beaver-tailed mammal at first baffled European naturalists. In 1799, the first scientists to examine a preserved platypus body judged it a fake made of several animals sewn together. The unique features of the platypus make it important in the study of evolutionary biology, and a recognisable and iconic symbol of Australia. It is culturally significant to several Aboriginal peoples, who also used to hunt it for food, and has appeared on stamps and currency.</p>
+    <p>The platypus was hunted for its fur, but it has been a legally protected species in all states where it occurs since 1912. Captive breeding programs have had slight success, and it is vulnerable to pollution, bycatching and climate change. It is classified as a near-threatened species by the IUCN, but a November 2020 report has recommended that it be upgraded to threatened species under the federal EPBC Act, due to habitat destruction and declining numbers in all states.</p>
+  </div>
+
+</body>
+</html>

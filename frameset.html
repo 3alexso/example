@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Frameset Test Page</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 40px; color: #1f2430; }
+    h1 { font-size: 1.4rem; }
+    ul { padding-left: 1.2em; }
+    a { color: #e2501f; }
+  </style>
+</head>
+
+<!-- Legacy <frameset> test: exercises real frame (not iframe) embedding. -->
+<frameset id="my-iframe1" cols="50%,50%">
+  <!-- Left frame: cross-domain -->
+  <frame id="my-iframe2" src="https://www.wikipedia.org" name="LeftFrame" title="Wiki Frame" style="border-bottom: 2px solid #ccc;">
+
+  <!-- Right frame: same-domain -->
+  <frame id="my-iframe3" src="https://3alexso.github.io/iframes/test1.html" name="RightFrame" title="Same domain Frame" style="border-right: 2px solid #ccc;">
+</frameset>
+
+<!-- Fallback content for browsers/settings that do not render frames -->
+<noframes>
+  <body>
+    <h1>Your browser does not support frames</h1>
+    <p>Please update your browser to view this content, or visit the pages directly:</p>
+    <ul>
+      <li><a href="https://www.wikipedia.org" target="_blank">Wikipedia</a></li>
+      <li><a href="https://3alexso.github.io/iframes/test1.html" target="_blank">test1.html (same-domain example)</a></li>
+    </ul>
+  </body>
+</noframes>
+
+</html>
